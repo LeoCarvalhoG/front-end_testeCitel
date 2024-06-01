@@ -1,0 +1,13 @@
+<!-- possiveis-doadores-por-tipo-sanguineo.component.html -->
+<div class="doadores-container">
+    <h2>Possíveis Doadores por Tipo Sanguíneo</h2>
+    <div *ngIf="doadoresPorTipoSanguineo">
+      <div *ngFor="let tipo of doadoresPorTipoSanguineo | keyvalue">
+        <h3>Tipo Sanguíneo: {{ tipo.key }}</h3>
+        <ul>
+          <li *ngFor="let doador of tipo.value">{{ doador.nome }} - {{ doador.idade }} anos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

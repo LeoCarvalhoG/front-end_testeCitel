@@ -1,0 +1,15 @@
+<ng-container *ngIf="dataLoaded">
+  <div>
+    <h2>Percentual de Obesos por Gênero</h2>
+    <div *ngFor="let item of data">
+      <p>{{ item.name }}: {{ item.value }}%</p>
+    </div>
+  </div>
+  <div>
+    <canvas id="pieChart"></canvas>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!dataLoaded">
+  <p>Carregando dados...</p>
+</ng-container>
