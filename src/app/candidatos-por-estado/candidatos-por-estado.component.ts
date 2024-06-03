@@ -7,7 +7,9 @@ import { CandidatosPorEstadoService } from './candidatos-por-estado.service';
   styleUrls: ['./candidatos-por-estado.component.css']
 })
 export class CandidatosPorEstadoComponent implements OnInit {
+  
   candidatosPorEstado: { estado: string, quantidade: number }[] = [];
+  dados: { estado: string; quantidade: number; }[];
 
   constructor(private candidatosPorEstadoService: CandidatosPorEstadoService) {} 
 

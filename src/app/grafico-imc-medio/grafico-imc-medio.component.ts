@@ -13,6 +13,7 @@ export class GraficoIMCMedioComponent implements OnInit {
   faixasEtarias: string[] = []; 
   imcMedioPorFaixaEtaria: number[] = [];
   grafico: Chart | null = null; 
+  dados: { faixaEtaria: string; imcMedio: number; }[];
 
   constructor(private imcMedioService: ImcMedioService) { }
 

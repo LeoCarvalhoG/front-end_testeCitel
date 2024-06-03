@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, pipe, tap, throwError } from 'rxjs';
 import { environment } from '../../../src/environments/environments';
 
 @Injectable({
@@ -11,7 +11,20 @@ export class PossiveisDoadoresPorTipoSanguineoService {
 
   constructor(private http: HttpClient) {}
 
-  buscarPossiveisDoadoresPorTipoSanguineo(): Observable<any> {
-    return this.http.get<any>(this.baseUrl);
+    buscarPossiveisDoadoresPorTipoSanguineo(): Observable<any> {
+      return this.http.get<any>(this.baseUrl)
+      .pipe(
+        tap(data => {
+          console.log('Dados recebidos:', data);
+        }),
+        catchError(this.handleError)
+      );
   }
+
+private handleError(error: HttpErrorResponse) {
+  console.error('Erro ao buscar Possiveis Doadores Por Tipo Sanguineo:', error);
+  return throwError('Erro ao buscar Possiveis Doadores Por Tipo Sanguineo, por favor, tente novamente mais tarde.');
+  }
+
 }
+

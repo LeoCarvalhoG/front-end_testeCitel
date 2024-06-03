@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaIdadePorTipoSanguineoService } from './media-idade-por-tipo-sanguineo.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-media-idade-por-tipo-sanguineo',
@@ -9,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MediaIdadePorTipoSanguineoComponent implements OnInit {
   mediaIdadePorTipoSanguineo: any;
+  dados: { tipoSanguineo: string; idadeMedia: number; }[];
 
   constructor(private mediaIdadePorTipoSanguineoService: MediaIdadePorTipoSanguineoService) { } // Correção no nome do serviço
 

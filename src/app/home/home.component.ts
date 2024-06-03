@@ -1,55 +1,92 @@
-import { Component, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UploadComponent } from '../upload/upload.component';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { CandidatosPorEstadoComponent } from '../candidatos-por-estado/candidatos-por-estado.component';
 import { GraficoIMCMedioComponent } from '../grafico-imc-medio/grafico-imc-medio.component';
 import { PercentualObesosPorGeneroComponent } from '../percentual-obesos-por-genero/percentual-obesos-por-genero.component';
-import { PossiveisDoadoresPorTipoSanguineoComponent } from '../possiveis-doadores-por-tipo-sanguineo/possiveis-doadores-por-tipo-sanguineo.component';
 import { MediaIdadePorTipoSanguineoComponent } from '../media-idade-por-tipo-sanguineo/media-idade-por-tipo-sanguineo.component';
+import { PossiveisDoadoresPorTipoSanguineoComponent } from '../possiveis-doadores-por-tipo-sanguineo/possiveis-doadores-por-tipo-sanguineo.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, AfterViewInit {
+onFileSelected($event: Event) {
+throw new Error('Método não implementado.');
+}
+uploadFile() {
+throw new Error('Método não implementado.');
+}
+  @ViewChild('candidatosPorEstadoContainer', { read: ViewContainerRef }) candidatosPorEstadoContainer: ViewContainerRef;
 
-  @ViewChild(UploadComponent) uploadComponent: UploadComponent
-  @ViewChild(CandidatosPorEstadoComponent) candidatosPorEstadoComponent: CandidatosPorEstadoComponent 
-  @ViewChild(GraficoIMCMedioComponent) imcMedioComponent: GraficoIMCMedioComponent 
-  @ViewChild(PercentualObesosPorGeneroComponent) percentualObesosPorGeneroComponent: PercentualObesosPorGeneroComponent
-  @ViewChild(PossiveisDoadoresPorTipoSanguineoComponent) possiveisDoadoresPorTipoSanguineoComponent: PossiveisDoadoresPorTipoSanguineoComponent 
-  @ViewChild(MediaIdadePorTipoSanguineoComponent) mediaIdadePorTipoSanguineoComponent: MediaIdadePorTipoSanguineoComponent
-  
-  constructor(private http: HttpClient) {}
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
-  onFileSelected(event: any) {
-      this.uploadComponent.onFileSelected(event);
+  ngOnInit(): void {
+    console.log('Componente inicializado!');
   }
 
-  uploadFile() {
-      this.uploadComponent.uploadFile();
+  ngAfterViewInit() {
+    if (this.candidatosPorEstadoContainer) {
+      console.log('Container de componentes inicializado!');
+    } else {
+      console.error('Erro ao inicializar o container de componentes!');
+    }
   }
 
   carregarCandidatosPorEstado() {
-      this.candidatosPorEstadoComponent.buscarCandidatosPorEstado();
+    if (!this.candidatosPorEstadoContainer) {
+      console.error('candidatosPorEstadoContainer não inicializado!');
+      return;
+    }
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(CandidatosPorEstadoComponent);
+    this.candidatosPorEstadoContainer.clear();
+    const componentRef = this.candidatosPorEstadoContainer.createComponent(componentFactory);
+    
   }
-  
+
   carregarImcMedioPorIdade() {
-      this.imcMedioComponent.buscarDadosIMCMedioPorFaixaEtaria();
+    if (!this.candidatosPorEstadoContainer) {
+      console.error('candidatosPorEstadoContainer não inicializado!');
+      return;
+    }
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(GraficoIMCMedioComponent);
+    this.candidatosPorEstadoContainer.clear();
+    const componentRef = this.candidatosPorEstadoContainer.createComponent(componentFactory);
+    
   }
-  
+
   carregarPercentualObesosPorGenero() {
-      this.percentualObesosPorGeneroComponent.buscarPercentualObesosPorGenero();
-    
+    if (!this.candidatosPorEstadoContainer) {
+      console.error('candidatosPorEstadoContainer não inicializado!');
+      return;
+    }
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(PercentualObesosPorGeneroComponent);
+    this.candidatosPorEstadoContainer.clear();
+    const componentRef = this.candidatosPorEstadoContainer.createComponent(componentFactory);
+   
   }
-  
-  carregarPossiveisDoadoresPorTipoSanguineo() {
-      this.possiveisDoadoresPorTipoSanguineoComponent.buscarPossiveisDoadoresPorTipoSanguineo();
-    
-  }
-  
+
   carregarMediaIdadePorTipoSanguineo() {
-      this.mediaIdadePorTipoSanguineoComponent.buscarMediaIdadePorTipoSanguineo();
+    if (!this.candidatosPorEstadoContainer) {
+      console.error('candidatosPorEstadoContainer não inicializado!');
+      return;
+    }
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(MediaIdadePorTipoSanguineoComponent);
+    this.candidatosPorEstadoContainer.clear();
+    const componentRef = this.candidatosPorEstadoContainer.createComponent(componentFactory);
+    
   }
+
+  carregarPossiveisDoadoresPorTipoSanguineo() {
+    if (!this.candidatosPorEstadoContainer) {
+      console.error('candidatosPorEstadoContainer não inicializado!');
+      return;
+    }
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(PossiveisDoadoresPorTipoSanguineoComponent);
+    this.candidatosPorEstadoContainer.clear();
+    const componentRef = this.candidatosPorEstadoContainer.createComponent(componentFactory);
+    
+  }
+
+
 }

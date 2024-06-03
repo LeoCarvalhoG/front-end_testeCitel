@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
-
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { UploadComponent } from './upload/upload.component';
 import { CandidatosPorEstadoComponent } from './candidatos-por-estado/candidatos-por-estado.component';
@@ -23,11 +23,13 @@ import { routes } from './app.routes';
     PossiveisDoadoresPorTipoSanguineoComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
-  bootstrap: []
+  bootstrap: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

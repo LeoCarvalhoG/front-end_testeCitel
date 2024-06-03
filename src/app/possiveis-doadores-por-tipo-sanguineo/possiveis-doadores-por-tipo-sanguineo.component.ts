@@ -8,9 +8,9 @@ import { Chart } from 'chart.js';
   styleUrls: ['./possiveis-doadores-por-tipo-sanguineo.component.css']
 })
 export class PossiveisDoadoresPorTipoSanguineoComponent implements OnInit {
-  [x: string]: any;
   tiposSanguineos: string[] = [];
   possiveisDoadores: number[] = [];
+  dados: { tipoSanguineo: string; doadoresPossiveis: number; }[];
 
   constructor(private possiveisDoadoresPorTipoSanguineoService: PossiveisDoadoresPorTipoSanguineoService) { }
 
